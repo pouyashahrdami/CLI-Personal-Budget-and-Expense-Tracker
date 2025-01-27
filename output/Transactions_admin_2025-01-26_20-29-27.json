@@ -1,0 +1,16 @@
+[
+    {
+        "amount": 100.0,
+        "category": "food",
+        "date": "2025-01-01",
+        "recurring": true,
+        "username": "admin"
+    },
+    {
+        "amount": 100.0,
+        "category": "Bills",
+        "date": "2025-01-01",
+        "recurring": false,
+        "username": "admin"
+    }
+]

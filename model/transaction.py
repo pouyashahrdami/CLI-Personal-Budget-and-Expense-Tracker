@@ -1,6 +1,6 @@
 from datetime import datetime
-
 import json
+
 class Transaction:
     categories = ["food", "Bills", "Health"]
 

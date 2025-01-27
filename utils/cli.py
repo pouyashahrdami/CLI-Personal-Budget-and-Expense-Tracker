@@ -5,6 +5,7 @@ from rich import box
 import json
 import sys
 import os
+from datetime import datetime
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from model.user import User
@@ -59,6 +60,11 @@ def show_main_menu():
     if choice == "2":
         console.clear()
         transaction_list_menu()
+    if choice == "7":
+        console.clear()
+        transaction_list_menu()
+    if choice == "8":
+        exit_application()
 
 
 def transaction_list_menu():
@@ -89,10 +95,28 @@ def transaction_list_menu():
                     str(user["recurring"]),  # Recurring
                 )
             console.print(table)
+
         else:
             console.print("no transaction found")
+
+        choice = int(console.input("press 1 to Export as Json : "))
+        current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        if choice == 1:
+            with open(
+                "output/Transactions_"
+                + logged_in_user["username"]
+                + "_"
+                + current_time
+                + ".json",
+                mode="w+",
+            ) as savefile:
+                json.dump(user_transactions, savefile, indent=4)
+            print("File Saved Sucesfully")
+        else:
+            print("invalide Choice ")
     except json.JSONDecodeError:
         transactions = []
+
 
 def add_transaction_menu():
     Username = logged_in_user["username"]
@@ -207,3 +231,7 @@ def check_username(username, user_details):
 
 def check_password(password):
     return User.check_password(password)
+
+
+def exit_application():
+    exit()
